@@ -39,7 +39,7 @@ def get_all_students(course: Optional[int] = None):
 
 
 @app.get("/students/{course}")
-def get_all_students_course(course: int, major: Optional[str] = None, enrollment_year: Optional[int] = 2018):
+def get_all_students_course(course: int, major: Optional[str] = None, enrollment_year: Optional[int] = None):
     students = json_to_dict_list(path_to_json)
     filtered_students = []
     for student in students:

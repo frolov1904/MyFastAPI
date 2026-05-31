@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: myfastapi_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: myfastapi
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/pgdata
+    restart: unless-stopped
+
+  adminer:
+    image: adminer
+    container_name: myfastapi_adminer
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:

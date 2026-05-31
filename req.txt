@@ -1,3 +1,8 @@
 fastapi[all]
 requests
 pydantic[email]
+sqlalchemy
+greenlet
+asyncpg
+alembic
+pydantic-settings
