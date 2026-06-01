@@ -12,3 +12,4 @@ bcrypt==4.0.1
 pytest
 pytest-asyncio
 httpx
+jinja2

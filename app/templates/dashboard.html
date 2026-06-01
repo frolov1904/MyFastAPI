@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-title">
+    <h2>Панель управления</h2>
+    <p class="muted">
+        Здесь отображаются функции, доступные текущему пользователю.
+    </p>
+</section>
+
+<section id="user-card" class="card hidden">
+    <h3>Текущий пользователь</h3>
+
+    <div class="user-info">
+        <p><strong>Email:</strong> <span id="user-email"></span></p>
+        <p><strong>Имя:</strong> <span id="user-name"></span></p>
+        <p><strong>Роли:</strong> <span id="user-roles"></span></p>
+    </div>
+</section>
+
+<section id="guest-card" class="card hidden">
+    <h3>Вы не авторизованы</h3>
+    <p class="muted">
+        Для доступа к панели управления нужно войти в систему.
+    </p>
+    <a class="primary-link" href="/ui/login">Перейти ко входу</a>
+</section>
+
+<section id="actions" class="grid hidden">
+    <article class="action-card">
+        <h3>Студенты</h3>
+        <p>Просмотр списка студентов доступен всем пользователям.</p>
+        <button class="secondary-button" data-action="load-students">
+            Показать студентов
+        </button>
+    </article>
+
+    <article class="action-card">
+        <h3>Специальности</h3>
+        <p>Просмотр списка специальностей доступен всем пользователям.</p>
+        <button class="secondary-button" data-action="load-majors">
+            Показать специальности
+        </button>
+    </article>
+
+    <article class="action-card auth-only hidden">
+        <h3>Добавить студента</h3>
+        <p>Функция доступна только авторизованным пользователям.</p>
+        <button class="secondary-button" data-action="show-add-student">
+            Открыть форму
+        </button>
+    </article>
+
+    <article class="action-card auth-only hidden">
+        <h3>Обновить студента</h3>
+        <p>Функция доступна только авторизованным пользователям.</p>
+        <button class="secondary-button" data-action="show-update-student">
+            Открыть форму
+        </button>
+    </article>
+
+    <article class="action-card admin-only hidden">
+        <h3>Добавить специальность</h3>
+        <p>Функция доступна только администраторам.</p>
+        <button class="secondary-button" data-action="show-add-major">
+            Открыть форму
+        </button>
+    </article>
+
+    <article class="action-card admin-only danger-card hidden">
+        <h3>Удалить студента</h3>
+        <p>Удаление доступно только администраторам.</p>
+        <button class="danger-button" data-action="show-delete-student">
+            Открыть форму
+        </button>
+    </article>
+</section>
+
+<section id="forms-area" class="card hidden">
+    <h3 id="form-title">Форма</h3>
+
+    <form id="add-major-form" class="form hidden">
+        <label>
+            Название специальности
+            <input type="text" id="major-name" placeholder="Информатика" required>
+        </label>
+
+        <label>
+            Описание специальности
+            <input type="text" id="major-description" placeholder="Описание направления">
+        </label>
+
+        <button type="submit" class="primary-button">
+            Добавить специальность
+        </button>
+    </form>
+
+    <form id="add-student-form" class="form hidden">
+        <label>
+            Телефон
+            <input type="text" id="student-phone" placeholder="+79991234567" required>
+        </label>
+
+        <label>
+            Имя
+            <input type="text" id="student-first-name" placeholder="Иван" required>
+        </label>
+
+        <label>
+            Фамилия
+            <input type="text" id="student-last-name" placeholder="Иванов" required>
+        </label>
+
+        <label>
+            Дата рождения
+            <input type="date" id="student-date-of-birth" required>
+        </label>
+
+        <label>
+            Email
+            <input type="email" id="student-email" placeholder="ivan@example.com" required>
+        </label>
+
+        <label>
+            Адрес
+            <input type="text" id="student-address" placeholder="г. Москва, ул. Тестовая, д. 1" required>
+        </label>
+
+        <label>
+            Год поступления
+            <input type="number" id="student-enrollment-year" placeholder="2022" required>
+        </label>
+
+        <label>
+            Курс
+            <input type="number" id="student-course" min="1" max="5" placeholder="2" required>
+        </label>
+
+        <label>
+            Специальность
+            <select id="student-major-id" required></select>
+        </label>
+
+        <label>
+            Примечание
+            <input type="text" id="student-special-notes" placeholder="Без особых примет">
+        </label>
+
+        <button type="submit" class="primary-button">
+            Добавить студента
+        </button>
+    </form>
+
+    <form id="update-student-form" class="form hidden">
+        <label>
+            ID студента
+            <input type="number" id="update-student-id" required>
+        </label>
+
+        <label>
+            Новый курс
+            <input type="number" id="update-student-course" min="1" max="5" placeholder="3">
+        </label>
+
+        <label>
+            Новая специальность
+            <select id="update-student-major-id">
+                <option value="">Не менять специальность</option>
+            </select>
+        </label>
+
+        <button type="submit" class="primary-button">
+            Обновить студента
+        </button>
+    </form>
+
+    <form id="delete-student-form" class="form hidden">
+        <label>
+            ID студента
+            <input type="number" id="delete-student-id" required>
+        </label>
+
+        <button type="submit" class="danger-button">
+            Удалить студента
+        </button>
+    </form>
+</section>
+
+<section id="output" class="card hidden">
+    <h3>Результат</h3>
+    <pre id="output-content"></pre>
+</section>
+{% endblock %}

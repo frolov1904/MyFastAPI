@@ -1,0 +1,206 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #1f2937;
+}
+
+.container {
+    width: min(1100px, 92%);
+    margin: 0 auto;
+}
+
+.header {
+    background: #111827;
+    color: white;
+    padding: 18px 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.logo {
+    margin: 0;
+    font-size: 26px;
+}
+
+.subtitle {
+    margin: 4px 0 0;
+    color: #cbd5e1;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav a,
+.link-button {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.link-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.main {
+    padding: 36px 0;
+}
+
+.auth-card,
+.card,
+.action-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+.auth-card {
+    max-width: 460px;
+    margin: 60px auto;
+}
+
+.page-title {
+    margin-bottom: 24px;
+}
+
+.page-title h2,
+.auth-card h2 {
+    margin-bottom: 8px;
+}
+
+.muted {
+    color: #64748b;
+}
+
+.form {
+    display: grid;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+label {
+    display: grid;
+    gap: 8px;
+    font-weight: 600;
+}
+
+input {
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 15px;
+}
+
+.primary-button,
+.secondary-button,
+.danger-button,
+.primary-link {
+    display: inline-block;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.primary-button,
+.primary-link {
+    background: #2563eb;
+    color: white;
+}
+
+.secondary-button {
+    background: #e0ecff;
+    color: #1d4ed8;
+}
+select {
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 15px;
+    background: white;
+}
+
+#forms-area {
+    margin-top: 24px;
+}
+.danger-button {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.message {
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.message.error {
+    color: #b91c1c;
+}
+
+.message.success {
+    color: #047857;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.action-card {
+    min-height: 180px;
+}
+
+.danger-card {
+    border: 1px solid #fecaca;
+}
+
+.user-info {
+    display: grid;
+    gap: 8px;
+}
+
+#output {
+    margin-top: 24px;
+}
+
+pre {
+    background: #0f172a;
+    color: #e5e7eb;
+    padding: 18px;
+    border-radius: 14px;
+    overflow-x: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 850px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
