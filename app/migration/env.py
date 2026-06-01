@@ -10,6 +10,7 @@ from alembic import context
 from app.config import get_db_url
 from app.database import Base
 from app.students.models import Major, Student
+from app.users.models import User
 
 
 config = context.config

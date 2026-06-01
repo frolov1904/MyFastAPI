@@ -1,4 +1,5 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status
+from app.users.dependencies import get_current_admin_user, get_current_user
 
 from app.students.dao import MajorDAO, StudentDAO
 from app.students.schemas import (
@@ -21,7 +22,10 @@ async def get_majors():
 
 
 @router.post("/majors", response_model=MajorRead, status_code=status.HTTP_201_CREATED)
-async def add_major(major: MajorCreate):
+async def add_major(
+    major: MajorCreate,
+    current_user=Depends(get_current_admin_user),
+):
     existing_major = await MajorDAO.find_one_or_none(major_name=major.major_name)
 
     if existing_major:
@@ -39,7 +43,10 @@ async def get_students():
 
 
 @router.post("/students", response_model=StudentRead, status_code=status.HTTP_201_CREATED)
-async def add_student(student: StudentCreate):
+async def add_student(
+    student: StudentCreate,
+    current_user=Depends(get_current_user),
+):
     major = await MajorDAO.find_one_or_none_by_id(student.major_id)
 
     if not major:
@@ -68,7 +75,11 @@ async def add_student(student: StudentCreate):
 
 
 @router.put("/students/{student_id}", response_model=StudentRead)
-async def update_student(student_id: int, student_data: StudentUpdate):
+async def update_student(
+    student_id: int,
+    student_data: StudentUpdate,
+    current_user=Depends(get_current_user),
+):
     values = student_data.model_dump(exclude_unset=True)
 
     if not values:
@@ -101,7 +112,10 @@ async def update_student(student_id: int, student_data: StudentUpdate):
 
 
 @router.delete("/students/{student_id}", response_model=StudentRead)
-async def delete_student(student_id: int):
+async def delete_student(
+    student_id: int,
+    current_user=Depends(get_current_admin_user),
+):
     deleted_student = await StudentDAO.delete(id=student_id)
 
     if not deleted_student:
